@@ -1,2 +1,7 @@
-package com.greger.wigelltravels.dao;public interface LocationRepository {
+package com.greger.wigelltravels.dao;
+
+import com.greger.wigelltravels.entity.Location;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface LocationRepository extends JpaRepository<Location, Integer> {
 }

@@ -1,4 +1,4 @@
-package com.greger.inviduelluppg.entity;
+package com.greger.wigelltravels.entity;
 
 import jakarta.persistence.*;
 
@@ -8,7 +8,7 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "address_id")
     private int id;
     @Column(name = "street")
     private String street;
