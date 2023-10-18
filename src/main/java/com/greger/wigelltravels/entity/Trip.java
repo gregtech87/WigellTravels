@@ -8,27 +8,45 @@ public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "trip_id")
-    private int id;
+    private int tripId;
+    @Column(name = "customer_id")
+    private int customerId;
     @Column(name = "departure_date")
     private String departureDate;
     @Column(name = "no_of_weeks")
     private int numberOfWeeks;
-    @Column(name = "total_price")
-    private double totalPrice;
+    @Column(name = "total_price_SEK")
+    private double totalPriceSek;
+    @Column(name = "total_price_PLN")
+    private double totalPricePln;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "destination_id")
     private Destination destination;
 
+//    @ManyToMany
+//    @JoinTable(name = "join_customers_trips",
+//            joinColumns = {@JoinColumn(name = "trip_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "customer_id")})
+//    private List<Customer> customerList = new ArrayList<>();
+
     public Trip() {
     }
 
-    public int getId() {
-        return id;
+    public int getTripId() {
+        return tripId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTripId(int id) {
+        this.tripId = id;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getDepartureDate() {
@@ -47,12 +65,20 @@ public class Trip {
         this.numberOfWeeks = numberOfWeeks;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public double getTotalPriceSek() {
+        return totalPriceSek;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setTotalPriceSek(double totalPriceSek) {
+        this.totalPriceSek = totalPriceSek;
+    }
+
+    public double getTotalPricePln() {
+        return totalPricePln;
+    }
+
+    public void setTotalPricePln(double totalPricePln) {
+        this.totalPricePln = totalPricePln;
     }
 
     public Destination getDestination() {
@@ -63,13 +89,23 @@ public class Trip {
         this.destination = destination;
     }
 
+//    public List<Customer> getCustomerList() {
+//        return customerList;
+//    }
+//
+//    public void setCustomerList(List<Customer> customerList) {
+//        this.customerList = customerList;
+//    }
+
     @Override
     public String toString() {
         return "Trip{" +
-                "id=" + id +
+                "tripId=" + tripId +
+                ", customerId=" + customerId +
                 ", departureDate='" + departureDate + '\'' +
                 ", numberOfWeeks=" + numberOfWeeks +
-                ", totalPrice=" + totalPrice +
+                ", totalPriceSek=" + totalPriceSek +
+                ", totalPricePln=" + totalPricePln +
                 ", destination=" + destination +
                 '}';
     }

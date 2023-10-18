@@ -12,7 +12,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
-    private int id;
+    private int customerId;
     @Column(name = "username")
     private String userName;
     @Column(name = "password")
@@ -32,19 +32,23 @@ public class Customer {
     @JoinColumn(name = "address_id")
     private Address address;
 
+//    @ManyToMany
+//    @JoinTable(name = "join_customers_trips",
+//        joinColumns = {@JoinColumn(name = "customer_id")},
+//        inverseJoinColumns = {@JoinColumn(name = "trip_id")})
+//    private List<Trip> tripList = new ArrayList<>();
     @OneToMany
-    @JoinColumn(name = "trip_id")
-    private List<Trip> tripList = new ArrayList<>();
+    private List<Trip> trips = new ArrayList<>();
 
     public Customer() {
     }
 
-    public int getId() {
-        return id;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCustomerId(int id) {
+        this.customerId = id;
     }
 
     public String getUserName() {
@@ -111,18 +115,18 @@ public class Customer {
         this.address = address;
     }
 
-    public List<Trip> getTripList() {
-        return tripList;
+    public List<Trip> getTrips() {
+        return trips;
     }
 
-    public void setTripList(List<Trip> tripList) {
-        this.tripList = tripList;
+    public void setTrips(List<Trip> tripList) {
+        this.trips = tripList;
     }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + id +
+                "id=" + customerId +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
@@ -131,7 +135,7 @@ public class Customer {
                 ", phone=" + phone +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", address=" + address +
-                ", tripList=" + tripList +
+                ", tripList=" + trips +
                 '}';
     }
 }

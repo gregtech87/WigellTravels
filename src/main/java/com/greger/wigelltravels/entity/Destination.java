@@ -13,12 +13,20 @@ public class Destination {
     private String hotellName;
     @Column(name = "price_per_week")
     private double pricePerWeek;
+    @Column(name = "city")
+    private String city;
+    @Column(name = "country")
+    private String country;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "location_id")
-    private Location location;
 
     public Destination() {
+    }
+
+    public Destination(String hotellName, double pricePerWeek, String city, String country) {
+        this.hotellName = hotellName;
+        this.pricePerWeek = pricePerWeek;
+        this.city = city;
+        this.country = country;
     }
 
     public int getId() {
@@ -45,12 +53,20 @@ public class Destination {
         this.pricePerWeek = pricePerWeek;
     }
 
-    public Location getLocation() {
-        return location;
+    public String getCity() {
+        return city;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     @Override
@@ -59,8 +75,8 @@ public class Destination {
                 "id=" + id +
                 ", hotellName='" + hotellName + '\'' +
                 ", pricePerWeek=" + pricePerWeek +
-                ", location=" + location +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
                 '}';
     }
 }
-
