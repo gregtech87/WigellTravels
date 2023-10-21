@@ -5,6 +5,7 @@ import com.greger.wigelltravels.entity.Address;
 import com.greger.wigelltravels.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,11 +40,13 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
+    @Transactional
     public Address save(Address address) {
         return addressRepository.save(address);
     }
 
     @Override
+    @Transactional
     public void deleteById(int id) {
         addressRepository.deleteById(id);
     }

@@ -6,6 +6,7 @@ import com.greger.wigelltravels.entity.Customer;
 import com.greger.wigelltravels.entity.Trip;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,18 +28,6 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public List<Customer> findAll() {
-//        List<Customer> updatedCustomerList = new ArrayList<>();
-//
-//        for (Customer c: customerRepository.findAll()){
-//            List<Trip> trips = c.getTrips();
-//            for (Trip t: tripRepository.findAll()){
-//                if (c.getCustomerId() == t.getCustomerId()){
-//                   trips.add(t);
-//                }
-//            }
-//            updatedCustomerList.add(c);
-//        }
-//        return updatedCustomerList;
         return customerRepository.findAll();
     }
 
@@ -56,11 +45,14 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    @Transactional
     public Customer save(Customer customer) {
+        System.out.println("HEJ HOPP GUMMI SNOPP: "+customer);
         return customerRepository.save(customer);
     }
 
     @Override
+    @Transactional
     public void deleteById(int id) {
         customerRepository.deleteById(id);
     }

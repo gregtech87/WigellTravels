@@ -2,6 +2,8 @@ package com.greger.wigelltravels.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "address")
 public class Address {
@@ -16,6 +18,9 @@ public class Address {
     private int postalCode;
     @Column(name = "city")
     private String city;
+
+//    @OneToMany
+//    List<Customer> customerList;
 
     public Address() {
     }
@@ -69,6 +74,14 @@ public class Address {
         this.city = city;
     }
 
+//    public List<Customer> getCustomerList() {
+//        return customerList;
+//    }
+//
+//    public void setCustomerList(List<Customer> customerList) {
+//        this.customerList = customerList;
+//    }
+
     @Override
     public String toString() {
         return "Address{" +
@@ -76,6 +89,7 @@ public class Address {
                 ", street='" + street + '\'' +
                 ", postalCode=" + postalCode +
                 ", city='" + city + '\'' +
+//                ", customerList=" + customerList +
                 '}';
     }
 }

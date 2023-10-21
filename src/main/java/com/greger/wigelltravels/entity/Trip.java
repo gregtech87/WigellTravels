@@ -2,6 +2,9 @@ package com.greger.wigelltravels.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "trip")
 public class Trip {
@@ -9,8 +12,8 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "trip_id")
     private int tripId;
-    @Column(name = "customer_id")
-    private int customerId;
+//    @Column(name = "customer_id")
+//    private int customerId;
     @Column(name = "departure_date")
     private String departureDate;
     @Column(name = "no_of_weeks")
@@ -25,10 +28,10 @@ public class Trip {
     private Destination destination;
 
 //    @ManyToMany
-//    @JoinTable(name = "join_customers_trips",
+//    @JoinTable(name = "customer_trips",
 //            joinColumns = {@JoinColumn(name = "trip_id")},
 //            inverseJoinColumns = {@JoinColumn(name = "customer_id")})
-//    private List<Customer> customerList = new ArrayList<>();
+//    private List<Customer> customers = new ArrayList<>();
 
     public Trip() {
     }
@@ -41,13 +44,13 @@ public class Trip {
         this.tripId = id;
     }
 
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
+//    public int getCustomerId() {
+//        return customerId;
+//    }
+//
+//    public void setCustomerId(int customerId) {
+//        this.customerId = customerId;
+//    }
 
     public String getDepartureDate() {
         return departureDate;
@@ -89,24 +92,25 @@ public class Trip {
         this.destination = destination;
     }
 
-//    public List<Customer> getCustomerList() {
-//        return customerList;
+//    public List<Customer> getCustomers() {
+//        return customers;
 //    }
 //
-//    public void setCustomerList(List<Customer> customerList) {
-//        this.customerList = customerList;
+//    public void setCustomers(List<Customer> customers) {
+//        this.customers = customers;
 //    }
 
     @Override
     public String toString() {
         return "Trip{" +
                 "tripId=" + tripId +
-                ", customerId=" + customerId +
+//                ", customerId=" + customerId +
                 ", departureDate='" + departureDate + '\'' +
                 ", numberOfWeeks=" + numberOfWeeks +
                 ", totalPriceSek=" + totalPriceSek +
                 ", totalPricePln=" + totalPricePln +
                 ", destination=" + destination +
+//                ", customers=" + customers +
                 '}';
     }
 }

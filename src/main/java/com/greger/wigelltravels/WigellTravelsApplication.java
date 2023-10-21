@@ -5,7 +5,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.greger.wigelltravels.entity.*;
+import com.greger.wigelltravels.service.AddressService;
 import com.greger.wigelltravels.service.CustomerService;
+import com.greger.wigelltravels.service.DestinationService;
+import com.greger.wigelltravels.service.TripService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,7 +30,7 @@ public class WigellTravelsApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(CustomerService customerService) {
+    CommandLineRunner commandLineRunner(CustomerService customerService, TripService tripService, DestinationService destinationService, AddressService addressService) {
         return runner -> {
             // Setting URL
             String url_str = "https://open.er-api.com/v6/latest/SEK";
@@ -60,42 +63,55 @@ public class WigellTravelsApplication {
 
 
 
+//            Customer customer1 = new Customer();
+//            customer1.setAddress(new Address(0,"street", 88888, "cityy"));
+//            System.out.println(customer1);
+//            customerService.save(customer1);
+
+//            Customer customer2 = new Customer();
+//            customer2.setUserName("XXXXXXXXXXXXXXX");
+//            customer2.setAddress(addressService.findById(4));
+//            customerService.save(customer2);
+//
+//
+            Address address = addressService.findById(4);
+//            address.setId(0);
+            System.out.println("************************* "+address);
 
 
+            Trip trip = tripService.findById(1);
+            trip.setDestination(destinationService.findById(1));
+            System.out.println(trip);
 
 
-            Destination destination = new Destination();
-            destination.setId(6);
-            destination.setHotellName("D - HOTELLL");
-            destination.setPricePerWeek(555);
-            destination.setCity("cccitty");
-            destination.setCountry("CCOuntry");
+            Trip trip1 = tripService.findById(2);
+            trip1.setDestination(destinationService.findById(2));
+            System.out.println(trip1);
 
-            Trip trip = new Trip();
-            trip.setTripId(2);
-            trip.setDepartureDate("date");
-            trip.setDestination(destination);
-            trip.setNumberOfWeeks(3);
-
-
-            Trip trip1 = trip;
+            Trip trip2 = new Trip();
+            trip2.setDestination(destinationService.findById(5));
 
             List<Trip> tripList = new ArrayList<>();
             tripList.add(trip);
             tripList.add(trip1);
+            tripList.add(trip2);
 
+            System.out.println(tripList);
             Customer customer = new Customer();
+            customer.setPhone(445);
             customer.setFirstName("afsdfsdf");
             customer.setLastName("ssss");
             customer.setDateOfBirth("AA");
             customer.setEmail("email");
             customer.setUserName("username");
             customer.setPassword("password");
-            customer.setAddress(new Address(2, "street", 111, "city"));
+            customer.setAddress(address);
             customer.setTrips(tripList);
 
             System.out.println(customer);
-//            customerService.save(customer);
+            customerService.save(customer);
+
+
 
         };
 

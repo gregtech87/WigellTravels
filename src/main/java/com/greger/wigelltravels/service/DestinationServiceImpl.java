@@ -4,6 +4,7 @@ import com.greger.wigelltravels.dao.DestinationRepository;
 import com.greger.wigelltravels.entity.Destination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,11 +38,13 @@ public class DestinationServiceImpl implements DestinationService{
     }
 
     @Override
+    @Transactional
     public Destination save(Destination destination) {
         return destinationRepository.save(destination);
     }
 
     @Override
+    @Transactional
     public void deleteById(int id) {
         destinationRepository.deleteById(id);
     }

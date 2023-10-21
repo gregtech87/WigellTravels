@@ -5,6 +5,7 @@ import com.greger.wigelltravels.entity.Address;
 import com.greger.wigelltravels.entity.Trip;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,11 +39,13 @@ public class TripServiceImpl implements TripService{
     }
 
     @Override
+    @Transactional
     public Trip save(Trip trip) {
         return tripRepository.save(trip);
     }
 
     @Override
+    @Transactional
     public void deleteById(int id) {
         tripRepository.deleteById(id);
     }
