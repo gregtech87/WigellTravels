@@ -36,6 +36,21 @@ public class Trip {
     public Trip() {
     }
 
+    public Trip(String departureDate, int numberOfWeeks, double totalPriceSek, double totalPricePln) {
+        this.departureDate = departureDate;
+        this.numberOfWeeks = numberOfWeeks;
+        this.totalPriceSek = totalPriceSek;
+        this.totalPricePln = totalPricePln;
+    }
+
+    public Trip(String departureDate, int numberOfWeeks, double totalPriceSek, double totalPricePln, Destination destination) {
+        this.departureDate = departureDate;
+        this.numberOfWeeks = numberOfWeeks;
+        this.totalPriceSek = totalPriceSek;
+        this.totalPricePln = totalPricePln;
+        this.destination = destination;
+    }
+
     public int getTripId() {
         return tripId;
     }

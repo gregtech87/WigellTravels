@@ -63,53 +63,66 @@ public class WigellTravelsApplication {
 
 
 
-//            Customer customer1 = new Customer();
-//            customer1.setAddress(new Address(0,"street", 88888, "cityy"));
-//            System.out.println(customer1);
-//            customerService.save(customer1);
+//             Address a = new Address("street", 88888, "cityy");
+//             a.setId(1);
+//            Address a = addressService.findById(4);
+//            System.out.println("ADDRESS: " + a);
+//             addressService.save(a);
+//
+//            Destination d = new Destination("DUMMY", 5, "DUMMY", "DUMMY");
+//            System.out.println("DESTINATION: " + d);
+//            destinationService.save(d);
 
-//            Customer customer2 = new Customer();
-//            customer2.setUserName("XXXXXXXXXXXXXXX");
-//            customer2.setAddress(addressService.findById(4));
-//            customerService.save(customer2);
-//
-//
-            Address address = addressService.findById(4);
+//            Trip t = new Trip("aaaaaa", 5, 5, 5 );
+//            Trip t = tripService.findById(1);
+//                t.setDestination(d);
+//            t.setDestination(destinationService.findById(2));
+//            System.out.println("TRIP: " + t);
+//            tripService.save(t);
+            System.out.println("*****************************");
+            Customer c = customerService.findById(1);
+            System.out.println("*****************************");
+            c.setUserName("FFFFFFFFUUU");
+            System.out.println("CUSTOMER: " + c);
+            customerService.save(c);
+
+//            Address address = new Address();
+//            Address address = addressService.findById(4);
 //            address.setId(0);
-            System.out.println("************************* "+address);
+//            System.out.println("************************* "+address);
 
 
-            Trip trip = tripService.findById(1);
-            trip.setDestination(destinationService.findById(1));
-            System.out.println(trip);
+//            Trip trip = tripService.findById(1);
+//            trip.setDestination(destinationService.findById(1));
+//            System.out.println(trip);
 
 
-            Trip trip1 = tripService.findById(2);
-            trip1.setDestination(destinationService.findById(2));
-            System.out.println(trip1);
+//            Trip trip1 = tripService.findById(2);
+//            trip1.setDestination(new Destination());
+//            System.out.println(trip1);
 
-            Trip trip2 = new Trip();
-            trip2.setDestination(destinationService.findById(5));
+//            Trip trip2 = new Trip();
+//            trip2.setDestination(destinationService.findById(5));
 
-            List<Trip> tripList = new ArrayList<>();
-            tripList.add(trip);
-            tripList.add(trip1);
-            tripList.add(trip2);
+//            List<Trip> tripList = new ArrayList<>();
+//            tripList.add(trip);
+//            tripList.add(trip1);
+//            tripList.add(trip2);
 
-            System.out.println(tripList);
-            Customer customer = new Customer();
-            customer.setPhone(445);
-            customer.setFirstName("afsdfsdf");
-            customer.setLastName("ssss");
-            customer.setDateOfBirth("AA");
-            customer.setEmail("email");
-            customer.setUserName("username");
-            customer.setPassword("password");
-            customer.setAddress(address);
-            customer.setTrips(tripList);
-
-            System.out.println(customer);
-            customerService.save(customer);
+//            System.out.println(tripList);
+//            Customer customer = new Customer();
+//            customer.setPhone(445);
+//            customer.setFirstName("afsdfsdf");
+//            customer.setLastName("ssss");
+//            customer.setDateOfBirth("AA");
+//            customer.setEmail("email");
+//            customer.setUserName("username");
+//            customer.setPassword("password");
+//            customer.setAddress(address);
+//            customer.setTrips(tripList);
+//
+//            System.out.println(customer);
+//            customerService.save(customer);
 
 
 

@@ -28,11 +28,12 @@ public class Customer {
     @Column(name = "date_of_birth")
     private String dateOfBirth;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+//    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @ManyToMany
+    @ManyToMany(fetch =FetchType.EAGER)
     @JoinTable(name = "customer_trips",
         joinColumns = {@JoinColumn(name = "customer_id")},
         inverseJoinColumns = {@JoinColumn(name = "trip_id")})
