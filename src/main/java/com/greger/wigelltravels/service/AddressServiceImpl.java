@@ -3,6 +3,9 @@ package com.greger.wigelltravels.service;
 import com.greger.wigelltravels.dao.AddressRepository;
 import com.greger.wigelltravels.entity.Address;
 import com.greger.wigelltravels.entity.Customer;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,5 +52,28 @@ public class AddressServiceImpl implements AddressService{
     @Transactional
     public void deleteById(int id) {
         addressRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public Address checkIfExistsInDatabaseIfNotSave(Address address) {
+
+        String street = address.getStreet();
+        int postalCode = address.getPostalCode();
+        String city = address.getCity();
+        System.out.println("###############################################################################");
+        System.out.println("INKOMMANDE: " + address);
+
+        Address addressFromDatabase = addressRepository.findAddressByStreetAndPostalCodeAndCity(street, postalCode, city);
+        if (addressFromDatabase != null){
+            System.out.println("FRÅN DB: " + addressFromDatabase);
+            return addressFromDatabase;
+        }
+        address.setId(0);
+        addressFromDatabase = save(address);
+
+        System.out.println("SPARAD: " + addressFromDatabase);
+        System.out.println("###############################################################################");
+        return addressFromDatabase;
     }
 }

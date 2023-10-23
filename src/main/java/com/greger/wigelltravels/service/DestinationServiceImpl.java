@@ -1,6 +1,7 @@
 package com.greger.wigelltravels.service;
 
 import com.greger.wigelltravels.dao.DestinationRepository;
+import com.greger.wigelltravels.entity.Address;
 import com.greger.wigelltravels.entity.Destination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,7 @@ public class DestinationServiceImpl implements DestinationService{
     @Override
     @Transactional
     public Destination save(Destination destination) {
+
         return destinationRepository.save(destination);
     }
 
@@ -47,5 +49,27 @@ public class DestinationServiceImpl implements DestinationService{
     @Transactional
     public void deleteById(int id) {
         destinationRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public Destination checkIfExistsInDatabaseIfNotSave(Destination destination) {
+        String city = destination.getCity();
+        String country = destination.getCountry();
+        String hotellName = destination.getHotellName();
+        System.out.println("###############################################################################");
+        System.out.println("INKOMMANDE: " + destination);
+
+        Destination destinationFromDatabase = destinationRepository.findDestinationByHotellNameAndCityAndCountry(hotellName, city, country);
+        if (destinationFromDatabase != null){
+            System.out.println("FRÅN DB: " + destinationFromDatabase);
+            return destinationFromDatabase;
+        }
+        destination.setId(0);
+        destinationFromDatabase = save(destination);
+
+        System.out.println("SPARAD: " + destinationFromDatabase);
+        System.out.println("###############################################################################");
+        return destinationFromDatabase;
     }
 }

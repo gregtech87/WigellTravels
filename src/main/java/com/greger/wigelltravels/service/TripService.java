@@ -9,4 +9,6 @@ public interface TripService {
     Trip findById(int id);
     Trip save(Trip trip);
     void deleteById(int id);
+    List<Trip> inspectTripList(List<Trip> tripList, int customerId);
+    List<Trip> findTripsByCustomerId(int customerId);
 }

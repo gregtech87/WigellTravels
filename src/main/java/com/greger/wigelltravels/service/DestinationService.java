@@ -9,4 +9,5 @@ public interface DestinationService {
     Destination findById(int id);
     Destination save(Destination destination);
     void deleteById(int id);
+    Destination checkIfExistsInDatabaseIfNotSave(Destination destination);
 }

@@ -1,5 +1,6 @@
 package com.greger.wigelltravels.service;
 
+import com.greger.wigelltravels.dao.AddressRepository;
 import com.greger.wigelltravels.dao.CustomerRepository;
 import com.greger.wigelltravels.dao.TripRepository;
 import com.greger.wigelltravels.entity.Customer;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,12 +17,14 @@ public class CustomerServiceImpl implements CustomerService{
 
 
     private CustomerRepository customerRepository;
-    private TripRepository tripRepository;
+    private TripService tripService;
+    private AddressService addressService;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository, TripRepository tripRepository) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, TripService tripService, AddressService addressService) {
         this.customerRepository = customerRepository;
-        this.tripRepository = tripRepository;
+        this.tripService = tripService;
+        this.addressService = addressService;
     }
 
 
@@ -37,6 +39,11 @@ public class CustomerServiceImpl implements CustomerService{
         Customer customer;
         if (c.isPresent()){
             customer = c.get();
+//            List<Trip> tripListFromDb = tripService.findTripsByCustomerId(customer.getCustomerId());
+//            if (tripListFromDb != null){
+//                customer.setTrips(tripListFromDb);
+//                System.out.println("@@@: " + tripListFromDb.size());
+//            }
         }
         else {
             throw new RuntimeException("Customer with id: " + id + " could not be found!");
@@ -48,6 +55,8 @@ public class CustomerServiceImpl implements CustomerService{
     @Transactional
     public Customer save(Customer customer) {
         System.out.println("HEJ HOPP GUMMI SNOPP: "+customer);
+        customer.setAddress(addressService.checkIfExistsInDatabaseIfNotSave(customer.getAddress()));
+        customer.setTrips(tripService.inspectTripList(customer.getTrips(), customer.getCustomerId()));
         return customerRepository.save(customer);
     }
 

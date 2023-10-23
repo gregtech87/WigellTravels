@@ -69,22 +69,24 @@ public class WigellTravelsApplication {
 //            System.out.println("ADDRESS: " + a);
 //             addressService.save(a);
 //
-//            Destination d = new Destination("DUMMY", 5, "DUMMY", "DUMMY");
-//            System.out.println("DESTINATION: " + d);
+            Destination d = new Destination("DUMMY", 5, "DUMMY", "DUMMY");
+            System.out.println("DESTINATION: " + d);
 //            destinationService.save(d);
 
-//            Trip t = new Trip("aaaaaa", 5, 5, 5 );
+            Trip t = new Trip("nnnnn2", 5, 5, 5 );
 //            Trip t = tripService.findById(1);
-//                t.setDestination(d);
-//            t.setDestination(destinationService.findById(2));
+                t.setDestination(d);
+//            t.setDestination(destinationService.findById(1));
 //            System.out.println("TRIP: " + t);
-//            tripService.save(t);
-            System.out.println("*****************************");
-            Customer c = customerService.findById(1);
-            System.out.println("*****************************");
-            c.setUserName("FFFFFFFFUUU");
-            System.out.println("CUSTOMER: " + c);
-            customerService.save(c);
+            tripService.save(t);
+//            System.out.println("*****************************");
+//
+//            Customer c = customerService.findById(1);
+//            c.setAddress(a);
+//            c.getTrips().add(t);
+//            System.out.println("*****************************");
+//
+//            customerService.save(c);
 
 //            Address address = new Address();
 //            Address address = addressService.findById(4);
