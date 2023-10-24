@@ -41,7 +41,7 @@ public class DestinationServiceImpl implements DestinationService{
     @Override
     @Transactional
     public Destination save(Destination destination) {
-
+        destination = checkIfExistsInDatabaseIfNotSave(destination, false);
         return destinationRepository.save(destination);
     }
 
@@ -53,7 +53,7 @@ public class DestinationServiceImpl implements DestinationService{
 
     @Override
     @Transactional
-    public Destination checkIfExistsInDatabaseIfNotSave(Destination destination) {
+    public Destination checkIfExistsInDatabaseIfNotSave(Destination destination, boolean autoSave) {
         String city = destination.getCity();
         String country = destination.getCountry();
         String hotellName = destination.getHotellName();
@@ -66,10 +66,14 @@ public class DestinationServiceImpl implements DestinationService{
             return destinationFromDatabase;
         }
         destination.setId(0);
-        destinationFromDatabase = save(destination);
+        if(autoSave){
+            destinationFromDatabase = save(destination);
+            System.out.println("SPARAD: " + destinationFromDatabase);
+            return destinationFromDatabase;
+        }
 
-        System.out.println("SPARAD: " + destinationFromDatabase);
+
         System.out.println("###############################################################################");
-        return destinationFromDatabase;
+      return destination;
     }
 }

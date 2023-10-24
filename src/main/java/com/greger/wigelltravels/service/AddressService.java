@@ -11,6 +11,6 @@ public interface AddressService {
     Address findById(int id);
     Address save(Address address);
     void deleteById(int id);
-    Address checkIfExistsInDatabaseIfNotSave(Address address);
+    Address checkIfExistsInDatabaseIfNotSave(Address address, boolean autoSave);
 
 }

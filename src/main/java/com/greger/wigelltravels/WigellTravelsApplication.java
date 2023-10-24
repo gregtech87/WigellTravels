@@ -70,6 +70,8 @@ public class WigellTravelsApplication {
 //             addressService.save(a);
 //
             Destination d = new Destination("DUMMY", 5, "DUMMY", "DUMMY");
+//            Destination d = destinationService.findById(5);
+//            d.setHotellName("korv");
             System.out.println("DESTINATION: " + d);
 //            destinationService.save(d);
 

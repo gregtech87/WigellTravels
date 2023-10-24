@@ -2,9 +2,6 @@ package com.greger.wigelltravels.entity;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Table(name = "trip")
 public class Trip {

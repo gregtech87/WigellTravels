@@ -56,7 +56,7 @@ public class AddressServiceImpl implements AddressService{
 
     @Override
     @Transactional
-    public Address checkIfExistsInDatabaseIfNotSave(Address address) {
+    public Address checkIfExistsInDatabaseIfNotSave(Address address, boolean autoSave) {
 
         String street = address.getStreet();
         int postalCode = address.getPostalCode();
@@ -70,10 +70,13 @@ public class AddressServiceImpl implements AddressService{
             return addressFromDatabase;
         }
         address.setId(0);
-        addressFromDatabase = save(address);
+        if (autoSave) {
+            addressFromDatabase = save(address);
+            System.out.println("SPARAD: " + addressFromDatabase);
+            return addressFromDatabase;
+        }
 
-        System.out.println("SPARAD: " + addressFromDatabase);
         System.out.println("###############################################################################");
-        return addressFromDatabase;
+        return address;
     }
 }

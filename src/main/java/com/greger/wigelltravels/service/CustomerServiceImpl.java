@@ -55,7 +55,7 @@ public class CustomerServiceImpl implements CustomerService{
     @Transactional
     public Customer save(Customer customer) {
         System.out.println("HEJ HOPP GUMMI SNOPP: "+customer);
-        customer.setAddress(addressService.checkIfExistsInDatabaseIfNotSave(customer.getAddress()));
+        customer.setAddress(addressService.checkIfExistsInDatabaseIfNotSave(customer.getAddress(), true));
         customer.setTrips(tripService.inspectTripList(customer.getTrips(), customer.getCustomerId()));
         return customerRepository.save(customer);
     }
