@@ -45,9 +45,6 @@ public class WigellTravelsApplication {
             JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
             JsonObject jsonobj = root.getAsJsonObject();
 
-            int asd;
-
-
 // Accessing object
             String req_result = jsonobj.get("result").getAsString();
             System.out.println(req_result);
@@ -69,18 +66,18 @@ public class WigellTravelsApplication {
 //            System.out.println("ADDRESS: " + a);
 //             addressService.save(a);
 //
-            Destination d = new Destination("DUMMY", 5, "DUMMY", "DUMMY");
+//            Destination d = new Destination("DUMMY", 5, "DUMMY", "DUMMY");
 //            Destination d = destinationService.findById(5);
 //            d.setHotellName("korv");
-            System.out.println("DESTINATION: " + d);
+//            System.out.println("DESTINATION: " + d);
 //            destinationService.save(d);
 
-            Trip t = new Trip("nnnnn2", 5, 5, 5 );
+//            Trip t = new Trip("nnnnn2", 5, 5, 5 );
 //            Trip t = tripService.findById(1);
-                t.setDestination(d);
+//                t.setDestination(d);
 //            t.setDestination(destinationService.findById(1));
 //            System.out.println("TRIP: " + t);
-            tripService.save(t);
+//            tripService.save(t);
 //            System.out.println("*****************************");
 //
 //            Customer c = customerService.findById(1);

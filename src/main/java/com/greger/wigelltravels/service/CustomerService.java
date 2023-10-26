@@ -9,4 +9,5 @@ public interface CustomerService {
     Customer findById(int id);
     Customer save(Customer customer);
     void deleteById(int id);
+    Customer update(int id, Customer customer);
 }

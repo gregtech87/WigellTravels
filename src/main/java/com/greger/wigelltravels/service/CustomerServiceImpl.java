@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +32,17 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public List<Customer> findAll() {
-        return customerRepository.findAll();
+        List<Customer> customerList = customerRepository.findAll();
+        for (Customer c : customerList){
+            for (Trip t: c.getTrips()) {
+                try {
+                    t = tripService.makeSureCurrencyIsUpdated(t, true);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        return customerList;
     }
 
     @Override
@@ -39,11 +51,13 @@ public class CustomerServiceImpl implements CustomerService{
         Customer customer;
         if (c.isPresent()){
             customer = c.get();
-//            List<Trip> tripListFromDb = tripService.findTripsByCustomerId(customer.getCustomerId());
-//            if (tripListFromDb != null){
-//                customer.setTrips(tripListFromDb);
-//                System.out.println("@@@: " + tripListFromDb.size());
-//            }
+            for (Trip t: customer.getTrips()){
+                try {
+                    t = tripService.makeSureCurrencyIsUpdated(t, true);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
         else {
             throw new RuntimeException("Customer with id: " + id + " could not be found!");
@@ -61,8 +75,34 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    public Customer update(int id, Customer customer) {
+        Customer customerFromDb = findById(id);
+        customerFromDb.setUserName(customer.getUserName());
+        customerFromDb.setPassword(customer.getPassword());
+        customerFromDb.setFirstName(customer.getFirstName());
+        customerFromDb.setLastName(customer.getLastName());
+        customerFromDb.setAddress(addressService.checkIfExistsInDatabaseIfNotSave(customer.getAddress(), true));
+        customerFromDb.setTrips(tripService.inspectTripList(customer.getTrips(),id));
+        customerFromDb.setEmail(customer.getEmail());
+        customerFromDb.setPhone(customer.getPhone());
+        customerFromDb.setDateOfBirth(customer.getDateOfBirth());
+        return customerFromDb;
+    }
+
+    @Override
     @Transactional
     public void deleteById(int id) {
+        Customer customer = findById(id);
+        List<Trip> tripList = customer.getTrips();
+        List<Trip> tripListForRemoval = new ArrayList<>();
+        for (int i = tripList.size()-1; i >= 0; i--){
+            tripListForRemoval.add(tripList.get(i));
+            tripList.remove(i);
+        }
+        save(customer);
+        for (Trip t : tripListForRemoval){
+            tripService.deleteById(t.getTripId());
+        }
         customerRepository.deleteById(id);
     }
 }
