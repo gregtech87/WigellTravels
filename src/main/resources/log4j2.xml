@@ -9,11 +9,11 @@
     </File>
 </Appenders>
 <Loggers>
-    <Logger name="myLogger" level="info" additivity="false">
+    <Logger name="MyLogger" level="info" additivity="false">
         <AppenderRef ref="File" />
         <AppenderRef ref="Console"  />
     </Logger>
-    <Root level="info">
+    <Root level="error">
         <AppenderRef ref="Console"/>
     </Root>
 </Loggers>

@@ -1,9 +1,5 @@
 package com.greger.wigelltravels.service;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.greger.wigelltravels.CurrencyConverter;
 import com.greger.wigelltravels.dao.TripRepository;
 import com.greger.wigelltravels.entity.Customer;
@@ -15,13 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -29,12 +20,12 @@ public class TripServiceImpl implements TripService {
 
     private final Logger logger = LogManager.getLogger("MyLogger");
     private TripRepository tripRepository;
-    private TripDestinationService tripDestinationService;
+    private DestinationService destinationService;
 
     @Autowired
-    public TripServiceImpl(TripRepository tripRepository, TripDestinationService tripDestinationService) {
+    public TripServiceImpl(TripRepository tripRepository, DestinationService destinationService) {
         this.tripRepository = tripRepository;
-        this.tripDestinationService = tripDestinationService;
+        this.destinationService = destinationService;
     }
 
     @Override
@@ -71,7 +62,7 @@ public class TripServiceImpl implements TripService {
     @Override
     @Transactional
     public Trip save(Trip trip) {
-        trip.setDestination(tripDestinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
+        trip.setDestination(destinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
         trip.setTotalPriceSEK(trip.getDestination().getPricePerWeek() * trip.getNumberOfWeeks());
         try {
             trip.setTotalPricePLN(CurrencyConverter.SekToRequestedCurrency(trip.getTotalPriceSEK(), "PLN"));
@@ -88,7 +79,7 @@ public class TripServiceImpl implements TripService {
         Trip tripFromDb = findById(id);
         Trip newTrip = new Trip();
         newTrip.setTripId(tripFromDb.getTripId());
-        newTrip.setDestination(tripDestinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
+        newTrip.setDestination(destinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
         newTrip.setNumberOfWeeks(trip.getNumberOfWeeks());
         newTrip.setTotalPriceSEK(trip.getTotalPriceSEK());
         newTrip.setTotalPricePLN(trip.getTotalPricePLN());
@@ -140,12 +131,12 @@ public class TripServiceImpl implements TripService {
                 tripFromDatabase.setNumberOfWeeks(trip.getNumberOfWeeks());
                 tripFromDatabase.setTotalPriceSEK(trip.getTotalPriceSEK());
                 tripFromDatabase.setTotalPricePLN(trip.getTotalPricePLN());
-                tripFromDatabase.setDestination(tripDestinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
+                tripFromDatabase.setDestination(destinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
             }
             return tripFromDatabase;
         }
 
-        trip.setDestination(tripDestinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
+        trip.setDestination(destinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
         if (autoSave) {
             trip = save(trip);
         }

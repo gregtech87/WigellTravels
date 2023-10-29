@@ -20,7 +20,7 @@ public class DestinationServiceImpl implements DestinationService{
     private DestinationRepository destinationRepository;
 
     @Autowired
-    public TripDestinationServiceImpl(DestinationRepository destinationRepository) {
+    public DestinationServiceImpl(DestinationRepository destinationRepository) {
         this.destinationRepository = destinationRepository;
     }
 
@@ -100,10 +100,7 @@ public class DestinationServiceImpl implements DestinationService{
             return destinationFromDatabase;
         }
         if(autoSave){
-            destinationFromDatabase = save(destination);
-            logger.info("Destination was edited from: " + destination + "\nTo: " + destinationFromDatabase);
-            System.out.println("SPARAD: " + destinationFromDatabase);
-            return destinationFromDatabase;
+            return save(destination);
         }
         System.out.println("###############################################################################");
         return destination;

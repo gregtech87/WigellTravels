@@ -115,19 +115,19 @@ public class CustomerServiceImpl implements CustomerService{
             tripService.deleteById(t.getTripId());
         }
 
-//        int addressId = customer.getAddress().getId();
+        int addressId = customer.getAddress().getId();
 
         customerRepository.deleteById(id);
         logger.info("Customer deleted: " + customer);
 
-//        List<Customer> remainingCustomersWithSameAddress = findCustomersByAddressId(addressId);
-//        if (remainingCustomersWithSameAddress.isEmpty()) {
-//            addressService.deleteAddressById(addressId);
-//        }
+        List<Customer> remainingCustomersWithSameAddress = findCustomersByAddressId(addressId);
+        if (remainingCustomersWithSameAddress.isEmpty()) {
+            addressService.deleteAddressById(addressId);
+        }
     }
-//    @Override
-//    public List<Customer> findCustomersByAddressId(int addressId) {
-//        return customerRepository.findByAddress_Id(addressId);
-//    }
+    @Override
+    public List<Customer> findCustomersByAddressId(int addressId) {
+        return customerRepository.findByAddress_Id(addressId);
+    }
 
 }
