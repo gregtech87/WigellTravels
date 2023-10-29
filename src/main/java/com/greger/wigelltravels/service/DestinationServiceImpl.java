@@ -16,11 +16,11 @@ import java.util.Optional;
 @Service
 public class DestinationServiceImpl implements DestinationService{
 
-    private final Logger logger = LogManager.getLogger("myLogger");
+    private final Logger logger = LogManager.getLogger("MyLogger");
     private DestinationRepository destinationRepository;
 
     @Autowired
-    public DestinationServiceImpl(DestinationRepository destinationRepository) {
+    public TripDestinationServiceImpl(DestinationRepository destinationRepository) {
         this.destinationRepository = destinationRepository;
     }
 
@@ -51,7 +51,6 @@ public class DestinationServiceImpl implements DestinationService{
     @Override
     public Destination updateDestination(int id, Destination destination) {
         Destination destinationFromDb = findById(id);
-
         destinationFromDb.setHotellName(destination.getHotellName());
         destinationFromDb.setPricePerWeek(destination.getPricePerWeek());
         destinationFromDb.setCity(destination.getCity());
@@ -87,28 +86,26 @@ public class DestinationServiceImpl implements DestinationService{
     @Override
     @Transactional
     public Destination checkIfExistsInDatabaseIfNotSave(Destination destination, boolean autoSave) {
-//        final Destination baseLineDestination = new Destination();
-//        baseLineDestination.setId(destination.getId());
-//        baseLineDestination.setCity(destination.getCity());
-//        baseLineDestination.setCountry(destination.getCountry());
-//        baseLineDestination.setPricePerWeek(destination.getPricePerWeek());
-//        baseLineDestination.setHotellName(destination.getHotellName());
 
         String city = destination.getCity();
         String country = destination.getCountry();
         String hotellName = destination.getHotellName();
 
         if (destination.getId() > 0){
-          return updateDestination(destination.getId(), destination);
+            return updateDestination(destination.getId(),destination);
         }
         Destination destinationFromDatabase = destinationRepository.findDestinationByHotellNameAndCityAndCountry(hotellName, city, country);
         if (destinationFromDatabase != null){
+            System.out.println("FRÅN DB: " + destinationFromDatabase);
             return destinationFromDatabase;
         }
         if(autoSave){
             destinationFromDatabase = save(destination);
+            logger.info("Destination was edited from: " + destination + "\nTo: " + destinationFromDatabase);
+            System.out.println("SPARAD: " + destinationFromDatabase);
             return destinationFromDatabase;
         }
-      return destination;
+        System.out.println("###############################################################################");
+        return destination;
     }
 }

@@ -2,6 +2,7 @@ package com.greger.wigelltravels.controller;
 
 import com.greger.wigelltravels.entity.Customer;
 import com.greger.wigelltravels.entity.Destination;
+import com.greger.wigelltravels.entity.Trip;
 import com.greger.wigelltravels.service.CustomerService;
 import com.greger.wigelltravels.service.DestinationService;
 import com.greger.wigelltravels.service.TripService;
@@ -28,8 +29,13 @@ public class TravelControllerAdmin {
         return customerService.findAllCustomers();
     }
 
+    @GetMapping("/trips2")
+    public List<Destination> findAllDestinations() {
+        return destinationService.findAll();
+    }
+
     @PostMapping("/customers")
-    public Customer saveCustomer(@RequestBody Customer customer) {
+    public Customer saveTrip(@RequestBody Customer customer) {
         if (customer.getCustomerId() > 0){
             customer.setCustomerId(0);
         }

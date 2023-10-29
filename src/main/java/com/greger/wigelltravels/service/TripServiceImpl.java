@@ -27,14 +27,14 @@ import java.util.Optional;
 @Service
 public class TripServiceImpl implements TripService {
 
-    private final Logger logger = LogManager.getLogger("myLogger");
+    private final Logger logger = LogManager.getLogger("MyLogger");
     private TripRepository tripRepository;
-    private DestinationService destinationService;
+    private TripDestinationService tripDestinationService;
 
     @Autowired
-    public TripServiceImpl(TripRepository tripRepository, DestinationService destinationService) {
+    public TripServiceImpl(TripRepository tripRepository, TripDestinationService tripDestinationService) {
         this.tripRepository = tripRepository;
-        this.destinationService = destinationService;
+        this.tripDestinationService = tripDestinationService;
     }
 
     @Override
@@ -65,19 +65,15 @@ public class TripServiceImpl implements TripService {
                 throw new RuntimeException(e);
             }
         }
-//        else {
-//            throw new RuntimeException("Trip with id: " + id + " could not be found!");
-//        }
         return trip;
     }
 
     @Override
     @Transactional
     public Trip save(Trip trip) {
-        trip.setDestination(destinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
+        trip.setDestination(tripDestinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
         trip.setTotalPriceSEK(trip.getDestination().getPricePerWeek() * trip.getNumberOfWeeks());
         try {
-//            trip.setTotalPricePLN(currencyConverterSekToRequestedCurrency(trip.getTotalPriceSEK(), "PLN"));
             trip.setTotalPricePLN(CurrencyConverter.SekToRequestedCurrency(trip.getTotalPriceSEK(), "PLN"));
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -92,7 +88,7 @@ public class TripServiceImpl implements TripService {
         Trip tripFromDb = findById(id);
         Trip newTrip = new Trip();
         newTrip.setTripId(tripFromDb.getTripId());
-        newTrip.setDestination(destinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
+        newTrip.setDestination(tripDestinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
         newTrip.setNumberOfWeeks(trip.getNumberOfWeeks());
         newTrip.setTotalPriceSEK(trip.getTotalPriceSEK());
         newTrip.setTotalPricePLN(trip.getTotalPricePLN());
@@ -116,8 +112,6 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public List<Trip> inspectTripList(List<Trip> tripList, int customerId) {
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        System.out.println("INKOMMANDE: " + tripList);
         List<Trip> inspectedTripList = new ArrayList<>();
         for (Trip trip : tripList) {
             Trip t = checkIfExistsInDatabaseIfNotSave(trip, customerId, true);
@@ -126,8 +120,6 @@ public class TripServiceImpl implements TripService {
                 inspectedTripList.add(t);
             }
         }
-        System.out.println("KONTROLLERAD: " + tripList);
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
         return inspectedTripList;
     }
 
@@ -138,12 +130,8 @@ public class TripServiceImpl implements TripService {
     }
 
     private Trip checkIfExistsInDatabaseIfNotSave(Trip trip, int customerId, boolean autoSave) {
-
-        System.out.println("###################### #########################################################");
-        System.out.println("INKOMMANDE: " + trip);
-
-        if (trip.getTripId() > 0){
-            return update(trip.getTripId(),trip);
+        if (trip.getTripId() > 0) {
+            return update(trip.getTripId(), trip);
         }
         Trip tripFromDatabase = tripRepository.findTripByCustomerIdAndDepartureDate(trip.getTripId(), customerId);
         if (tripFromDatabase != null) {
@@ -152,20 +140,15 @@ public class TripServiceImpl implements TripService {
                 tripFromDatabase.setNumberOfWeeks(trip.getNumberOfWeeks());
                 tripFromDatabase.setTotalPriceSEK(trip.getTotalPriceSEK());
                 tripFromDatabase.setTotalPricePLN(trip.getTotalPricePLN());
-                tripFromDatabase.setDestination(destinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
-                System.out.println("MODDED");
+                tripFromDatabase.setDestination(tripDestinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
             }
-            System.out.println("FRÅN DB: " + tripFromDatabase);
             return tripFromDatabase;
         }
 
-        trip.setDestination(destinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
+        trip.setDestination(tripDestinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
         if (autoSave) {
             trip = save(trip);
         }
-
-        System.out.println("SPARAD: " + trip);
-        System.out.println("###############################################################################");
         return trip;
     }
 
@@ -173,7 +156,6 @@ public class TripServiceImpl implements TripService {
     @Transactional
     public Trip makeSureCurrencyIsUpdated(Trip trip, boolean autoSave) throws IOException {
         double totSEK = trip.getDestination().getPricePerWeek() * trip.getNumberOfWeeks();
-//        double totPLN = currencyConverterSekToRequestedCurrency(totSEK, "PLN");
         double totPLN = CurrencyConverter.SekToRequestedCurrency(totSEK, "PLN");
 
         if (trip.getTotalPricePLN() != totPLN) {
@@ -183,7 +165,6 @@ public class TripServiceImpl implements TripService {
                 return save(trip);
             }
         }
-
         return trip;
     }
 }

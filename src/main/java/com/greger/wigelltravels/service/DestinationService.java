@@ -8,6 +8,7 @@ public interface DestinationService {
     List<Destination> findAll();
     Destination findById(int id);
     Destination save(Destination destination);
-    void deleteById(int id);
+    Destination updateDestination(int id, Destination destination);
+    String deleteById(int id);
     Destination checkIfExistsInDatabaseIfNotSave(Destination destination, boolean autoSave);
 }

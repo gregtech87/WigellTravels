@@ -13,9 +13,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
     private int customerId;
-//    @Column(name = "username")
-//    private String userName;
-    @Column(name = "username", unique = true, nullable = false)
+    @Column(name = "username")
     private String userName;
     @Column(name = "password")
     private String password;

@@ -1,6 +1,8 @@
 package com.greger.wigelltravels.service;
 
+import com.greger.wigelltravels.dao.AddressRepository;
 import com.greger.wigelltravels.dao.CustomerRepository;
+import com.greger.wigelltravels.dao.TripRepository;
 import com.greger.wigelltravels.entity.Customer;
 import com.greger.wigelltravels.entity.Trip;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +19,8 @@ import java.util.Optional;
 @Service
 public class CustomerServiceImpl implements CustomerService{
 
-    private final Logger logger = LogManager.getLogger("myLogger");
+
+    private final Logger logger = LogManager.getLogger("MyLogger");
     private CustomerRepository customerRepository;
     private TripService tripService;
     private AddressService addressService;
@@ -28,8 +31,6 @@ public class CustomerServiceImpl implements CustomerService{
         this.tripService = tripService;
         this.addressService = addressService;
     }
-
-
     @Override
     public List<Customer> findAllCustomers() {
         List<Customer> customerList = customerRepository.findAll();
@@ -65,12 +66,21 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     @Transactional
     public Customer saveCustomer(Customer customer) {
-        System.out.println("HEJ HOPP GUMMI SNOPP: "+customer);
         customer.setAddress(addressService.checkIfExistsInDatabaseIfNotSave(customer.getAddress(), true));
         customer.setTrips(tripService.inspectTripList(customer.getTrips(), customer.getCustomerId()));
         logger.info("Customer saved: " + customer);
         return customerRepository.save(customer);
     }
+
+//    @Override
+//    public Customer updateCustomer(Customer customers, int id) {
+//        Customer c = customerRepository.findById(id).orElseThrow(()-> new RuntimeException("Kunde inte finna medlem "+ customers +" med Id: "+id));
+//        c.setUsername(customers.getUsername());
+//        c.setName(customers.getName());
+//        c.setAddress(customers.getAddress());
+//        customerRepository.save(c);
+//        return c;
+//    }
 
     @Override
     public Customer updateCustomer(int id, Customer customer) {
@@ -89,6 +99,7 @@ public class CustomerServiceImpl implements CustomerService{
         return saveCustomer(customerFromDb);
     }
 
+
     @Override
     @Transactional
     public void deleteCustomerById(int id) {
@@ -103,7 +114,20 @@ public class CustomerServiceImpl implements CustomerService{
         for (Trip t : tripListForRemoval){
             tripService.deleteById(t.getTripId());
         }
-        logger.info("Customer deleted: " + customer);
+
+//        int addressId = customer.getAddress().getId();
+
         customerRepository.deleteById(id);
+        logger.info("Customer deleted: " + customer);
+
+//        List<Customer> remainingCustomersWithSameAddress = findCustomersByAddressId(addressId);
+//        if (remainingCustomersWithSameAddress.isEmpty()) {
+//            addressService.deleteAddressById(addressId);
+//        }
     }
+//    @Override
+//    public List<Customer> findCustomersByAddressId(int addressId) {
+//        return customerRepository.findByAddress_Id(addressId);
+//    }
+
 }

@@ -2,6 +2,10 @@ package com.greger.wigelltravels.service;
 
 import com.greger.wigelltravels.dao.AddressRepository;
 import com.greger.wigelltravels.entity.Address;
+import com.greger.wigelltravels.entity.Customer;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +17,7 @@ import java.util.Optional;
 
 @Service
 public class AddressServiceImpl implements AddressService{
-    private final Logger logger = LogManager.getLogger("myLogger");
+    private final Logger logger = LogManager.getLogger("MyLogger");
     private AddressRepository addressRepository;
 
     @Autowired
@@ -29,12 +33,9 @@ public class AddressServiceImpl implements AddressService{
     @Override
     public Address findAddressById(int id) {
         Optional<Address> a = addressRepository.findById(id);
-        Address address;
+        Address address = new Address();
         if (a.isPresent()){
             address = a.get();
-        }
-        else {
-            throw new RuntimeException("Address with id: " + id + " could not be found!");
         }
         return address;
     }
@@ -56,7 +57,7 @@ public class AddressServiceImpl implements AddressService{
         newAddress.setPostalCode(address.getPostalCode());
         newAddress.setStreet(address.getStreet());
         newAddress.setCity(address.getCity());
-        address.setId(id);
+
         logger.info("Address was edited " + "\nFrom: " + addressFromDatabase + "\nTo: " + newAddress);
         return saveAddress(newAddress);
     }
@@ -74,27 +75,27 @@ public class AddressServiceImpl implements AddressService{
     @Override
     @Transactional
     public Address checkIfExistsInDatabaseIfNotSave(Address address, boolean autoSave) {
-//        final Address baseAddress =new Address();
-//        baseAddress.setId(address.getId());
-//        baseAddress.setCity(address.getCity());
-//        baseAddress.setStreet(address.getStreet());
-//        baseAddress.setPostalCode(address.getPostalCode());
+        final Address baseAddress =new Address();
+        baseAddress.setId(address.getId());
+        baseAddress.setCity(address.getCity());
+        baseAddress.setStreet(address.getStreet());
+        baseAddress.setPostalCode(address.getPostalCode());
 
         String street = address.getStreet();
         int postalCode = address.getPostalCode();
         String city = address.getCity();
 
-        if (address.getId() > 0){
-            return updateAddress(address.getId(), address);
+        if (baseAddress.getId() > 0){
+            return updateAddress(baseAddress.getId(), address);
         }
         Address addressFromDatabase = findAddressByStreetAndPostalCodeAndCity(street, postalCode, city);
         if (addressFromDatabase != null){
             return addressFromDatabase;
         }
         if (autoSave) {
-            Address savedAddress = saveAddress(address);
-            return savedAddress;
+            return saveAddress(address);
         }
         return address;
     }
 }
+

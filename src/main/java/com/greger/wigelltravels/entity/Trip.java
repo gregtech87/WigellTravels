@@ -16,9 +16,9 @@ public class Trip {
     @Column(name = "no_of_weeks")
     private int numberOfWeeks;
     @Column(name = "total_price_SEK")
-    private double totalPriceSek;
+    private double totalPriceSEK;
     @Column(name = "total_price_PLN")
-    private double totalPricePln;
+    private double totalPricePLN;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "destination_id")
@@ -33,18 +33,18 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(String departureDate, int numberOfWeeks, double totalPriceSek, double totalPricePln) {
+    public Trip(String departureDate, int numberOfWeeks, double totalPriceSEK, double totalPricePLN) {
         this.departureDate = departureDate;
         this.numberOfWeeks = numberOfWeeks;
-        this.totalPriceSek = totalPriceSek;
-        this.totalPricePln = totalPricePln;
+        this.totalPriceSEK = totalPriceSEK;
+        this.totalPricePLN = totalPricePLN;
     }
 
-    public Trip(String departureDate, int numberOfWeeks, double totalPriceSek, double totalPricePln, Destination destination) {
+    public Trip(String departureDate, int numberOfWeeks, double totalPriceSEK, double totalPricePLN, Destination destination) {
         this.departureDate = departureDate;
         this.numberOfWeeks = numberOfWeeks;
-        this.totalPriceSek = totalPriceSek;
-        this.totalPricePln = totalPricePln;
+        this.totalPriceSEK = totalPriceSEK;
+        this.totalPricePLN = totalPricePLN;
         this.destination = destination;
     }
 
@@ -80,20 +80,20 @@ public class Trip {
         this.numberOfWeeks = numberOfWeeks;
     }
 
-    public double getTotalPriceSek() {
-        return totalPriceSek;
+    public double getTotalPriceSEK() {
+        return totalPriceSEK;
     }
 
-    public void setTotalPriceSek(double totalPriceSek) {
-        this.totalPriceSek = totalPriceSek;
+    public void setTotalPriceSEK(double totalPriceSek) {
+        this.totalPriceSEK = totalPriceSek;
     }
 
-    public double getTotalPricePln() {
-        return totalPricePln;
+    public double getTotalPricePLN() {
+        return totalPricePLN;
     }
 
-    public void setTotalPricePln(double totalPricePln) {
-        this.totalPricePln = totalPricePln;
+    public void setTotalPricePLN(double totalPricePln) {
+        this.totalPricePLN = totalPricePln;
     }
 
     public Destination getDestination() {
@@ -119,8 +119,8 @@ public class Trip {
 //                ", customerId=" + customerId +
                 ", departureDate='" + departureDate + '\'' +
                 ", numberOfWeeks=" + numberOfWeeks +
-                ", totalPriceSek=" + totalPriceSek +
-                ", totalPricePln=" + totalPricePln +
+                ", totalPriceSek=" + totalPriceSEK +
+                ", totalPricePln=" + totalPricePLN +
                 ", destination=" + destination +
 //                ", customers=" + customers +
                 '}';

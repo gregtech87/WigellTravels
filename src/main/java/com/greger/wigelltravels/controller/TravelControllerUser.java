@@ -25,6 +25,11 @@ import java.util.List;
         return destinationService.findAll();
     }
 
+     @GetMapping("/trips/{id}")
+     public Trip getTrip(@PathVariable int id) {
+         return tripService.findById(id);
+     }
+
     @PostMapping("/trips")
     public Trip saveTrip(@RequestBody Trip trip) {
         if (trip.getTripId() > 0){
@@ -38,9 +43,9 @@ import java.util.List;
          return tripService.update(id, trip);
      }
 
-     @GetMapping("/trips/{id}")
-     public Trip getTrip(@PathVariable int id) {
-         return tripService.findById(id);
-     }
-
+//    @DeleteMapping("/trips/{id}")
+//    public String deleteTrip(@PathVariable int id) {
+//        tripService.deleteById(id);
+//        return ("Member with id: " + id + " has been deleted!");
+//    }
 }
