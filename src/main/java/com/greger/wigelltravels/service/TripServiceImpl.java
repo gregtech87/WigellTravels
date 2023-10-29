@@ -114,12 +114,6 @@ public class TripServiceImpl implements TripService {
         return inspectedTripList;
     }
 
-
-    @Override
-    public List<Trip> findTripsByCustomerId(int customerId) {
-        return tripRepository.findTripsByCustomerId(customerId);
-    }
-
     private Trip checkIfExistsInDatabaseIfNotSave(Trip trip, int customerId, boolean autoSave) {
         if (trip.getTripId() > 0) {
             return update(trip.getTripId(), trip);

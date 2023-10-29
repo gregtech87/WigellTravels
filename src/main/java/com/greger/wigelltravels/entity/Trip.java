@@ -9,8 +9,6 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "trip_id")
     private int tripId;
-//    @Column(name = "customer_id")
-//    private int customerId;
     @Column(name = "departure_date")
     private String departureDate;
     @Column(name = "no_of_weeks")
@@ -23,12 +21,6 @@ public class Trip {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "destination_id")
     private Destination destination;
-
-//    @ManyToMany
-//    @JoinTable(name = "customer_trips",
-//            joinColumns = {@JoinColumn(name = "trip_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "customer_id")})
-//    private List<Customer> customers = new ArrayList<>();
 
     public Trip() {
     }
@@ -55,14 +47,6 @@ public class Trip {
     public void setTripId(int id) {
         this.tripId = id;
     }
-
-//    public int getCustomerId() {
-//        return customerId;
-//    }
-//
-//    public void setCustomerId(int customerId) {
-//        this.customerId = customerId;
-//    }
 
     public String getDepartureDate() {
         return departureDate;
@@ -104,25 +88,15 @@ public class Trip {
         this.destination = destination;
     }
 
-//    public List<Customer> getCustomers() {
-//        return customers;
-//    }
-//
-//    public void setCustomers(List<Customer> customers) {
-//        this.customers = customers;
-//    }
-
     @Override
     public String toString() {
         return "Trip{" +
                 "tripId=" + tripId +
-//                ", customerId=" + customerId +
                 ", departureDate='" + departureDate + '\'' +
                 ", numberOfWeeks=" + numberOfWeeks +
                 ", totalPriceSek=" + totalPriceSEK +
                 ", totalPricePln=" + totalPricePLN +
                 ", destination=" + destination +
-//                ", customers=" + customers +
                 '}';
     }
 }

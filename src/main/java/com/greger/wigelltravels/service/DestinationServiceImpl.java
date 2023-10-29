@@ -1,7 +1,6 @@
 package com.greger.wigelltravels.service;
 
 import com.greger.wigelltravels.dao.DestinationRepository;
-import com.greger.wigelltravels.entity.Address;
 import com.greger.wigelltravels.entity.Destination;
 import com.greger.wigelltravels.entity.Trip;
 import org.apache.logging.log4j.LogManager;
@@ -42,7 +41,6 @@ public class DestinationServiceImpl implements DestinationService{
     @Override
     @Transactional
     public Destination save(Destination destination) {
-//        destination = checkIfExistsInDatabaseIfNotSave(destination, false);
         Destination savedDestination = destinationRepository.save(destination);
         logger.info("Destination saved: " + savedDestination);
         return savedDestination;
@@ -96,13 +94,11 @@ public class DestinationServiceImpl implements DestinationService{
         }
         Destination destinationFromDatabase = destinationRepository.findDestinationByHotellNameAndCityAndCountry(hotellName, city, country);
         if (destinationFromDatabase != null){
-            System.out.println("FRÅN DB: " + destinationFromDatabase);
             return destinationFromDatabase;
         }
         if(autoSave){
             return save(destination);
         }
-        System.out.println("###############################################################################");
         return destination;
     }
 }

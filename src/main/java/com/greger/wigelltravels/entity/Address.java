@@ -2,8 +2,6 @@ package com.greger.wigelltravels.entity;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "address")
 public class Address {
@@ -20,19 +18,6 @@ public class Address {
     private String city;
 
     public Address() {
-    }
-
-    public Address(String street, int postalCode, String city) {
-        this.street = street;
-        this.postalCode = postalCode;
-        this.city = city;
-    }
-
-    public Address(int id, String street, int postalCode, String city) {
-        this.id = id;
-        this.street = street;
-        this.postalCode = postalCode;
-        this.city = city;
     }
 
     public Address(int id) {
@@ -71,13 +56,6 @@ public class Address {
         this.city = city;
     }
 
-//    public List<Customer> getCustomerList() {
-//        return customerList;
-//    }
-//
-//    public void setCustomerList(List<Customer> customerList) {
-//        this.customerList = customerList;
-//    }
 
     @Override
     public String toString() {
@@ -86,7 +64,6 @@ public class Address {
                 ", street='" + street + '\'' +
                 ", postalCode=" + postalCode +
                 ", city='" + city + '\'' +
-//                ", customerList=" + customerList +
                 '}';
     }
 }

@@ -42,10 +42,4 @@ import java.util.List;
      public Trip updateTrip(@PathVariable int id, @RequestBody Trip trip) {
          return tripService.update(id, trip);
      }
-
-//    @DeleteMapping("/trips/{id}")
-//    public String deleteTrip(@PathVariable int id) {
-//        tripService.deleteById(id);
-//        return ("Member with id: " + id + " has been deleted!");
-//    }
 }

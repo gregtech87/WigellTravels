@@ -1,6 +1,5 @@
 package com.greger.wigelltravels.dao;
 
-import com.greger.wigelltravels.entity.Address;
 import com.greger.wigelltravels.entity.Destination;
 import com.greger.wigelltravels.entity.Trip;
 import org.springframework.data.jpa.repository.JpaRepository;

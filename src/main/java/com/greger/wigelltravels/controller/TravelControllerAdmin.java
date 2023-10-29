@@ -2,10 +2,8 @@ package com.greger.wigelltravels.controller;
 
 import com.greger.wigelltravels.entity.Customer;
 import com.greger.wigelltravels.entity.Destination;
-import com.greger.wigelltravels.entity.Trip;
 import com.greger.wigelltravels.service.CustomerService;
 import com.greger.wigelltravels.service.DestinationService;
-import com.greger.wigelltravels.service.TripService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,23 +13,16 @@ import java.util.List;
 public class TravelControllerAdmin {
 
     private CustomerService customerService;
-    private TripService tripService;
     private DestinationService destinationService;
 
-    public TravelControllerAdmin(CustomerService customerService, TripService tripService, DestinationService destinationService) {
+    public TravelControllerAdmin(CustomerService customerService, DestinationService destinationService) {
         this.customerService = customerService;
-        this.tripService = tripService;
         this.destinationService = destinationService;
     }
 
     @GetMapping("/customers")
     public List<Customer> findAll() {
         return customerService.findAllCustomers();
-    }
-
-    @GetMapping("/trips2")
-    public List<Destination> findAllDestinations() {
-        return destinationService.findAll();
     }
 
     @PostMapping("/customers")
