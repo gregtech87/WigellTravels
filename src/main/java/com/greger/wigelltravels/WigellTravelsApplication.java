@@ -4,11 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.greger.wigelltravels.entity.*;
 import com.greger.wigelltravels.service.AddressService;
 import com.greger.wigelltravels.service.CustomerService;
 import com.greger.wigelltravels.service.DestinationService;
 import com.greger.wigelltravels.service.TripService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,12 +19,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @SpringBootApplication
 public class WigellTravelsApplication {
+
+    private final Logger logger = LogManager.getLogger("myLogger");
+//    private static final Logger logger = LogManager.getLogger(WigellTravelsApplication.class);
+//    private static final Logger logger = LogManager.getRootLogger();
 
     public static void main(String[] args) {
         SpringApplication.run(WigellTravelsApplication.class, args);
@@ -45,6 +48,9 @@ public class WigellTravelsApplication {
             JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
             JsonObject jsonobj = root.getAsJsonObject();
 
+            int asd;
+
+
 // Accessing object
             String req_result = jsonobj.get("result").getAsString();
             System.out.println(req_result);
@@ -58,6 +64,10 @@ public class WigellTravelsApplication {
             double zloty = (double) map.get("PLN");
             System.out.println(zloty);
 
+//            logger.info("FFFFFFFUUUUUUUUUUUUU");
+//            logger.info("Zloty = " + zloty);
+//            logger.error("Zloty = " + zloty);
+//            logger.warn("AAAAAAAAAAAAAAAAAAAAAAAAA");
 
 
 //             Address a = new Address("street", 88888, "cityy");

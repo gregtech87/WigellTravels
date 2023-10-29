@@ -5,9 +5,9 @@ import com.greger.wigelltravels.entity.Customer;
 import java.util.List;
 
 public interface CustomerService {
-    List<Customer> findAll();
-    Customer findById(int id);
-    Customer save(Customer customer);
-    void deleteById(int id);
-    Customer update(int id, Customer customer);
+    List<Customer> findAllCustomers();
+    Customer findCustomerById(int id);
+    Customer saveCustomer(Customer customer);
+    void deleteCustomerById(int id);
+    Customer updateCustomer(int id, Customer customer);
 }

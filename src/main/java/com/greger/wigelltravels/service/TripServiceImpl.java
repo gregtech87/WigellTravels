@@ -8,6 +8,8 @@ import com.greger.wigelltravels.CurrencyConverter;
 import com.greger.wigelltravels.dao.TripRepository;
 import com.greger.wigelltravels.entity.Customer;
 import com.greger.wigelltravels.entity.Trip;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +27,7 @@ import java.util.Optional;
 @Service
 public class TripServiceImpl implements TripService {
 
+    private final Logger logger = LogManager.getLogger("myLogger");
     private TripRepository tripRepository;
     private DestinationService destinationService;
 
@@ -53,7 +56,7 @@ public class TripServiceImpl implements TripService {
     @Override
     public Trip findById(int id) {
         Optional<Trip> t = tripRepository.findById(id);
-        Trip trip;
+        Trip trip = new Trip();
         if (t.isPresent()) {
             trip = t.get();
             try {
@@ -61,9 +64,10 @@ public class TripServiceImpl implements TripService {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        } else {
-            throw new RuntimeException("Trip with id: " + id + " could not be found!");
         }
+//        else {
+//            throw new RuntimeException("Trip with id: " + id + " could not be found!");
+//        }
         return trip;
     }
 
@@ -78,18 +82,23 @@ public class TripServiceImpl implements TripService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return tripRepository.save(trip);
+        Trip savedTrip = tripRepository.save(trip);
+        logger.info("Trip saved: " + savedTrip);
+        return savedTrip;
     }
 
     @Override
     public Trip update(int id, Trip trip) {
         Trip tripFromDb = findById(id);
-        tripFromDb.setDestination(destinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
-        tripFromDb.setNumberOfWeeks(trip.getNumberOfWeeks());
-        tripFromDb.setTotalPriceSEK(trip.getTotalPriceSEK());
-        tripFromDb.setTotalPricePLN(trip.getTotalPricePLN());
-        tripFromDb.setDepartureDate(trip.getDepartureDate());
-        return save(tripFromDb);
+        Trip newTrip = new Trip();
+        newTrip.setTripId(tripFromDb.getTripId());
+        newTrip.setDestination(destinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
+        newTrip.setNumberOfWeeks(trip.getNumberOfWeeks());
+        newTrip.setTotalPriceSEK(trip.getTotalPriceSEK());
+        newTrip.setTotalPricePLN(trip.getTotalPricePLN());
+        newTrip.setDepartureDate(trip.getDepartureDate());
+        logger.info("Trip edited \nFrom: " + tripFromDb + "\nTo: " + newTrip);
+        return save(newTrip);
     }
 
     @Override
@@ -133,6 +142,9 @@ public class TripServiceImpl implements TripService {
         System.out.println("###################### #########################################################");
         System.out.println("INKOMMANDE: " + trip);
 
+        if (trip.getTripId() > 0){
+            return update(trip.getTripId(),trip);
+        }
         Trip tripFromDatabase = tripRepository.findTripByCustomerIdAndDepartureDate(trip.getTripId(), customerId);
         if (tripFromDatabase != null) {
             if (!trip.equals(tripFromDatabase)) {
@@ -146,7 +158,7 @@ public class TripServiceImpl implements TripService {
             System.out.println("FRÅN DB: " + tripFromDatabase);
             return tripFromDatabase;
         }
-        trip.setTripId(0);
+
         trip.setDestination(destinationService.checkIfExistsInDatabaseIfNotSave(trip.getDestination(), true));
         if (autoSave) {
             trip = save(trip);
@@ -173,25 +185,5 @@ public class TripServiceImpl implements TripService {
         }
 
         return trip;
-    }
-
-    private double currencyConverterSekToRequestedCurrency(double sek, String requestedCurrency) throws IOException {
-
-        String url_str = "https://open.er-api.com/v6/latest/SEK";
-
-        URL url = new URL(url_str);
-        HttpURLConnection request = (HttpURLConnection) url.openConnection();
-        request.connect();
-
-        JsonParser jp = new JsonParser();
-        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
-        JsonObject jsonobj = root.getAsJsonObject();
-
-        Map map = new Gson().fromJson(jsonobj.get("rates"), Map.class);
-        double currency = (double) map.get(requestedCurrency);
-        double calculatedCurrency = sek * currency;
-
-        return Math.round(calculatedCurrency);
-
     }
 }

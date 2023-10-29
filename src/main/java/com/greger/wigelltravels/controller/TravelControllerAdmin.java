@@ -2,7 +2,6 @@ package com.greger.wigelltravels.controller;
 
 import com.greger.wigelltravels.entity.Customer;
 import com.greger.wigelltravels.entity.Destination;
-import com.greger.wigelltravels.entity.Trip;
 import com.greger.wigelltravels.service.CustomerService;
 import com.greger.wigelltravels.service.DestinationService;
 import com.greger.wigelltravels.service.TripService;
@@ -26,30 +25,25 @@ public class TravelControllerAdmin {
 
     @GetMapping("/customers")
     public List<Customer> findAll() {
-        return customerService.findAll();
-    }
-
-    @GetMapping("/trips2")
-    public List<Destination> findAllDestinations() {
-        return destinationService.findAll();
+        return customerService.findAllCustomers();
     }
 
     @PostMapping("/customers")
-    public Customer saveTrip(@RequestBody Customer customer) {
+    public Customer saveCustomer(@RequestBody Customer customer) {
         if (customer.getCustomerId() > 0){
             customer.setCustomerId(0);
         }
-        return customerService.save(customer);
+        return customerService.saveCustomer(customer);
     }
 
     @PutMapping("/customers/{id}")
     public Customer updateCustomer(@PathVariable int id, @RequestBody Customer customer){
-        return customerService.update(id, customer);
+        return customerService.updateCustomer(id, customer);
     }
 
     @DeleteMapping("/customers/{id}")
     public String deleteCustomer(@PathVariable int id) {
-        customerService.deleteById(id);
+        customerService.deleteCustomerById(id);
         return ("Customer with id: " + id + " has been deleted!");
     }
 

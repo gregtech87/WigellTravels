@@ -1,10 +1,10 @@
 package com.greger.wigelltravels.service;
 
-import com.greger.wigelltravels.dao.AddressRepository;
 import com.greger.wigelltravels.dao.CustomerRepository;
-import com.greger.wigelltravels.dao.TripRepository;
 import com.greger.wigelltravels.entity.Customer;
 import com.greger.wigelltravels.entity.Trip;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +17,7 @@ import java.util.Optional;
 @Service
 public class CustomerServiceImpl implements CustomerService{
 
-
+    private final Logger logger = LogManager.getLogger("myLogger");
     private CustomerRepository customerRepository;
     private TripService tripService;
     private AddressService addressService;
@@ -31,7 +31,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 
     @Override
-    public List<Customer> findAll() {
+    public List<Customer> findAllCustomers() {
         List<Customer> customerList = customerRepository.findAll();
         for (Customer c : customerList){
             for (Trip t: c.getTrips()) {
@@ -46,9 +46,9 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public Customer findById(int id) {
+    public Customer findCustomerById(int id) {
         Optional<Customer> c = customerRepository.findById(id);
-        Customer customer;
+        Customer customer = new Customer();
         if (c.isPresent()){
             customer = c.get();
             for (Trip t: customer.getTrips()){
@@ -59,24 +59,22 @@ public class CustomerServiceImpl implements CustomerService{
                 }
             }
         }
-        else {
-            throw new RuntimeException("Customer with id: " + id + " could not be found!");
-        }
         return customer;
     }
 
     @Override
     @Transactional
-    public Customer save(Customer customer) {
+    public Customer saveCustomer(Customer customer) {
         System.out.println("HEJ HOPP GUMMI SNOPP: "+customer);
         customer.setAddress(addressService.checkIfExistsInDatabaseIfNotSave(customer.getAddress(), true));
         customer.setTrips(tripService.inspectTripList(customer.getTrips(), customer.getCustomerId()));
+        logger.info("Customer saved: " + customer);
         return customerRepository.save(customer);
     }
 
     @Override
-    public Customer update(int id, Customer customer) {
-        Customer customerFromDb = findById(id);
+    public Customer updateCustomer(int id, Customer customer) {
+        Customer customerFromDb = findCustomerById(id);
         customerFromDb.setUserName(customer.getUserName());
         customerFromDb.setPassword(customer.getPassword());
         customerFromDb.setFirstName(customer.getFirstName());
@@ -86,23 +84,26 @@ public class CustomerServiceImpl implements CustomerService{
         customerFromDb.setEmail(customer.getEmail());
         customerFromDb.setPhone(customer.getPhone());
         customerFromDb.setDateOfBirth(customer.getDateOfBirth());
-        return customerFromDb;
+        customer.setCustomerId(id);
+        logger.info("Customer edited \nFrom: " + customer + "\nTo: " + customerFromDb);
+        return saveCustomer(customerFromDb);
     }
 
     @Override
     @Transactional
-    public void deleteById(int id) {
-        Customer customer = findById(id);
+    public void deleteCustomerById(int id) {
+        Customer customer = findCustomerById(id);
         List<Trip> tripList = customer.getTrips();
         List<Trip> tripListForRemoval = new ArrayList<>();
         for (int i = tripList.size()-1; i >= 0; i--){
             tripListForRemoval.add(tripList.get(i));
             tripList.remove(i);
         }
-        save(customer);
+        saveCustomer(customer);
         for (Trip t : tripListForRemoval){
             tripService.deleteById(t.getTripId());
         }
+        logger.info("Customer deleted: " + customer);
         customerRepository.deleteById(id);
     }
 }

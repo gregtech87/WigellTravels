@@ -13,7 +13,9 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
     private int customerId;
-    @Column(name = "username")
+//    @Column(name = "username")
+//    private String userName;
+    @Column(name = "username", unique = true, nullable = false)
     private String userName;
     @Column(name = "password")
     private String password;
@@ -28,7 +30,6 @@ public class Customer {
     @Column(name = "date_of_birth")
     private String dateOfBirth;
 
-//    @ManyToOne(cascade = CascadeType.ALL)
     @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
@@ -38,8 +39,6 @@ public class Customer {
         joinColumns = {@JoinColumn(name = "customer_id")},
         inverseJoinColumns = {@JoinColumn(name = "trip_id")})
     private List<Trip> trips = new ArrayList<>();
-//    @OneToMany
-//    private List<Trip> trips = new ArrayList<>();
 
     public Customer() {
     }
