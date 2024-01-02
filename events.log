@@ -1,0 +1,70 @@
+2024-01-02 02:17:13.154 [http-nio-8585-exec-5] INFO  MyLogger - Destination edited 
+From: Destination{id=1, hotellName='The Continental', pricePerWeek=1225.5, city='Bryssel', country='Tyskland'}
+To: Destination{id=1, hotellName='The Continental', pricePerWeek=1225.5, city='Bryssel', country='Tyskland'}
+2024-01-02 02:17:13.161 [http-nio-8585-exec-5] INFO  MyLogger - Destination saved: Destination{id=1, hotellName='The Continental', pricePerWeek=1225.5, city='Bryssel', country='Tyskland'}
+2024-01-02 02:17:13.190 [http-nio-8585-exec-5] INFO  MyLogger - Trip saved: Trip{tripId=1, departureDate='2023-02-15', numberOfWeeks=1, totalPriceSek=1225.5, totalPricePln=479.0, destination=Destination{id=1, hotellName='The Continental', pricePerWeek=1225.5, city='Bryssel', country='Tyskland'}}
+2024-01-02 02:17:13.225 [http-nio-8585-exec-5] INFO  MyLogger - Destination edited 
+From: Destination{id=2, hotellName='Clarion', pricePerWeek=6444.8, city='Sundsvall', country='Sverige'}
+To: Destination{id=2, hotellName='Clarion', pricePerWeek=6444.8, city='Sundsvall', country='Sverige'}
+2024-01-02 02:17:13.226 [http-nio-8585-exec-5] INFO  MyLogger - Destination saved: Destination{id=2, hotellName='Clarion', pricePerWeek=6444.8, city='Sundsvall', country='Sverige'}
+2024-01-02 02:17:13.253 [http-nio-8585-exec-5] INFO  MyLogger - Trip saved: Trip{tripId=2, departureDate='2023-03-22', numberOfWeeks=2, totalPriceSek=12889.6, totalPricePln=5039.0, destination=Destination{id=2, hotellName='Clarion', pricePerWeek=6444.8, city='Sundsvall', country='Sverige'}}
+2024-01-02 02:17:13.282 [http-nio-8585-exec-5] INFO  MyLogger - Destination edited 
+From: Destination{id=2, hotellName='Clarion', pricePerWeek=6444.8, city='Sundsvall', country='Sverige'}
+To: Destination{id=2, hotellName='Clarion', pricePerWeek=6444.8, city='Sundsvall', country='Sverige'}
+2024-01-02 02:17:13.282 [http-nio-8585-exec-5] INFO  MyLogger - Destination saved: Destination{id=2, hotellName='Clarion', pricePerWeek=6444.8, city='Sundsvall', country='Sverige'}
+2024-01-02 02:17:13.312 [http-nio-8585-exec-5] INFO  MyLogger - Trip saved: Trip{tripId=3, departureDate='2023-04-10', numberOfWeeks=3, totalPriceSek=19334.4, totalPricePln=7559.0, destination=Destination{id=2, hotellName='Clarion', pricePerWeek=6444.8, city='Sundsvall', country='Sverige'}}
+2024-01-02 02:17:13.341 [http-nio-8585-exec-5] INFO  MyLogger - Destination edited 
+From: Destination{id=4, hotellName='Los Pyramidos', pricePerWeek=66748.8, city='Alcudia', country='Mallorca'}
+To: Destination{id=4, hotellName='Los Pyramidos', pricePerWeek=66748.8, city='Alcudia', country='Mallorca'}
+2024-01-02 02:17:13.342 [http-nio-8585-exec-5] INFO  MyLogger - Destination saved: Destination{id=4, hotellName='Los Pyramidos', pricePerWeek=66748.8, city='Alcudia', country='Mallorca'}
+2024-01-02 02:17:13.372 [http-nio-8585-exec-5] INFO  MyLogger - Trip saved: Trip{tripId=4, departureDate='2023-05-05', numberOfWeeks=4, totalPriceSek=266995.2, totalPricePln=104384.0, destination=Destination{id=4, hotellName='Los Pyramidos', pricePerWeek=66748.8, city='Alcudia', country='Mallorca'}}
+2024-01-02 02:17:13.403 [http-nio-8585-exec-5] INFO  MyLogger - Destination edited 
+From: Destination{id=5, hotellName='Taj Mahal Palace', pricePerWeek=1300.0, city='Bangalore', country='India'}
+To: Destination{id=5, hotellName='Taj Mahal Palace', pricePerWeek=1300.0, city='Bangalore', country='India'}
+2024-01-02 02:17:13.403 [http-nio-8585-exec-5] INFO  MyLogger - Destination saved: Destination{id=5, hotellName='Taj Mahal Palace', pricePerWeek=1300.0, city='Bangalore', country='India'}
+2024-01-02 02:17:13.430 [http-nio-8585-exec-5] INFO  MyLogger - Trip saved: Trip{tripId=5, departureDate='2023-06-18', numberOfWeeks=5, totalPriceSek=6500.0, totalPricePln=2541.0, destination=Destination{id=5, hotellName='Taj Mahal Palace', pricePerWeek=1300.0, city='Bangalore', country='India'}}
+2024-01-02 02:17:13.461 [http-nio-8585-exec-5] INFO  MyLogger - Destination edited 
+From: Destination{id=12, hotellName='Vesuvius View Hotel', pricePerWeek=950.8, city='Naples', country='Italy'}
+To: Destination{id=12, hotellName='Vesuvius View Hotel', pricePerWeek=950.8, city='Naples', country='Italy'}
+2024-01-02 02:17:13.461 [http-nio-8585-exec-5] INFO  MyLogger - Destination saved: Destination{id=12, hotellName='Vesuvius View Hotel', pricePerWeek=950.8, city='Naples', country='Italy'}
+2024-01-02 02:17:13.488 [http-nio-8585-exec-5] INFO  MyLogger - Trip saved: Trip{tripId=6, departureDate='2023-07-07', numberOfWeeks=6, totalPriceSek=5704.799999999999, totalPricePln=2230.0, destination=Destination{id=12, hotellName='Vesuvius View Hotel', pricePerWeek=950.8, city='Naples', country='Italy'}}
+2024-01-02 02:17:13.517 [http-nio-8585-exec-5] INFO  MyLogger - Destination edited 
+From: Destination{id=25, hotellName='Atlas Mountains Retreat', pricePerWeek=1000.0, city='Marrakech', country='Morocco'}
+To: Destination{id=25, hotellName='Atlas Mountains Retreat', pricePerWeek=1000.0, city='Marrakech', country='Morocco'}
+2024-01-02 02:17:13.518 [http-nio-8585-exec-5] INFO  MyLogger - Destination saved: Destination{id=25, hotellName='Atlas Mountains Retreat', pricePerWeek=1000.0, city='Marrakech', country='Morocco'}
+2024-01-02 02:17:13.545 [http-nio-8585-exec-5] INFO  MyLogger - Trip saved: Trip{tripId=7, departureDate='2023-08-12', numberOfWeeks=7, totalPriceSek=7000.0, totalPricePln=2737.0, destination=Destination{id=25, hotellName='Atlas Mountains Retreat', pricePerWeek=1000.0, city='Marrakech', country='Morocco'}}
+2024-01-02 02:17:13.574 [http-nio-8585-exec-5] INFO  MyLogger - Destination edited 
+From: Destination{id=31, hotellName='Windmill Charm Hotel', pricePerWeek=1050.75, city='Amsterdam', country='Netherlands'}
+To: Destination{id=31, hotellName='Windmill Charm Hotel', pricePerWeek=1050.75, city='Amsterdam', country='Netherlands'}
+2024-01-02 02:17:13.574 [http-nio-8585-exec-5] INFO  MyLogger - Destination saved: Destination{id=31, hotellName='Windmill Charm Hotel', pricePerWeek=1050.75, city='Amsterdam', country='Netherlands'}
+2024-01-02 02:17:13.604 [http-nio-8585-exec-5] INFO  MyLogger - Trip saved: Trip{tripId=8, departureDate='2023-09-01', numberOfWeeks=8, totalPriceSek=8406.0, totalPricePln=3286.0, destination=Destination{id=31, hotellName='Windmill Charm Hotel', pricePerWeek=1050.75, city='Amsterdam', country='Netherlands'}}
+2024-01-02 02:17:13.632 [http-nio-8585-exec-5] INFO  MyLogger - Destination edited 
+From: Destination{id=43, hotellName='Kremlin Palace Hotel', pricePerWeek=850.0, city='Moscow', country='Russia'}
+To: Destination{id=43, hotellName='Kremlin Palace Hotel', pricePerWeek=850.0, city='Moscow', country='Russia'}
+2024-01-02 02:17:13.632 [http-nio-8585-exec-5] INFO  MyLogger - Destination saved: Destination{id=43, hotellName='Kremlin Palace Hotel', pricePerWeek=850.0, city='Moscow', country='Russia'}
+2024-01-02 02:17:13.659 [http-nio-8585-exec-5] INFO  MyLogger - Trip saved: Trip{tripId=9, departureDate='2023-10-15', numberOfWeeks=9, totalPriceSek=7650.0, totalPricePln=2991.0, destination=Destination{id=43, hotellName='Kremlin Palace Hotel', pricePerWeek=850.0, city='Moscow', country='Russia'}}
+2024-01-02 02:17:13.689 [http-nio-8585-exec-5] INFO  MyLogger - Destination edited 
+From: Destination{id=54, hotellName='Safari Plains Resort', pricePerWeek=750.5, city='Nairobi', country='Kenya'}
+To: Destination{id=54, hotellName='Safari Plains Resort', pricePerWeek=750.5, city='Nairobi', country='Kenya'}
+2024-01-02 02:17:13.689 [http-nio-8585-exec-5] INFO  MyLogger - Destination saved: Destination{id=54, hotellName='Safari Plains Resort', pricePerWeek=750.5, city='Nairobi', country='Kenya'}
+2024-01-02 02:17:13.715 [http-nio-8585-exec-5] INFO  MyLogger - Trip saved: Trip{tripId=10, departureDate='2023-11-20', numberOfWeeks=10, totalPriceSek=7505.0, totalPricePln=2934.0, destination=Destination{id=54, hotellName='Safari Plains Resort', pricePerWeek=750.5, city='Nairobi', country='Kenya'}}
+2024-01-02 02:17:13.745 [http-nio-8585-exec-5] INFO  MyLogger - Destination edited 
+From: Destination{id=18, hotellName='Central Park Grand Hotel', pricePerWeek=1000.25, city='New York', country='United States'}
+To: Destination{id=18, hotellName='Central Park Grand Hotel', pricePerWeek=1000.25, city='New York', country='United States'}
+2024-01-02 02:17:13.745 [http-nio-8585-exec-5] INFO  MyLogger - Destination saved: Destination{id=18, hotellName='Central Park Grand Hotel', pricePerWeek=1000.25, city='New York', country='United States'}
+2024-01-02 02:17:13.772 [http-nio-8585-exec-5] INFO  MyLogger - Trip saved: Trip{tripId=11, departureDate='2023-12-05', numberOfWeeks=11, totalPriceSek=11002.75, totalPricePln=4302.0, destination=Destination{id=18, hotellName='Central Park Grand Hotel', pricePerWeek=1000.25, city='New York', country='United States'}}
+2024-01-02 02:17:13.800 [http-nio-8585-exec-5] INFO  MyLogger - Destination edited 
+From: Destination{id=51, hotellName='Castle View Lodge', pricePerWeek=850.25, city='Edinburgh', country='Scotland'}
+To: Destination{id=51, hotellName='Castle View Lodge', pricePerWeek=850.25, city='Edinburgh', country='Scotland'}
+2024-01-02 02:17:13.800 [http-nio-8585-exec-5] INFO  MyLogger - Destination saved: Destination{id=51, hotellName='Castle View Lodge', pricePerWeek=850.25, city='Edinburgh', country='Scotland'}
+2024-01-02 02:17:13.836 [http-nio-8585-exec-5] INFO  MyLogger - Trip saved: Trip{tripId=12, departureDate='2023-12-20', numberOfWeeks=12, totalPriceSek=10203.0, totalPricePln=3989.0, destination=Destination{id=51, hotellName='Castle View Lodge', pricePerWeek=850.25, city='Edinburgh', country='Scotland'}}
+2024-01-02 02:17:13.865 [http-nio-8585-exec-5] INFO  MyLogger - Destination edited 
+From: Destination{id=23, hotellName='Copacabana Beachfront Resort', pricePerWeek=850.25, city='Rio de Janeiro', country='Brazil'}
+To: Destination{id=23, hotellName='Copacabana Beachfront Resort', pricePerWeek=850.25, city='Rio de Janeiro', country='Brazil'}
+2024-01-02 02:17:13.866 [http-nio-8585-exec-5] INFO  MyLogger - Destination saved: Destination{id=23, hotellName='Copacabana Beachfront Resort', pricePerWeek=850.25, city='Rio de Janeiro', country='Brazil'}
+2024-01-02 02:17:13.893 [http-nio-8585-exec-5] INFO  MyLogger - Trip saved: Trip{tripId=13, departureDate='2023-12-25', numberOfWeeks=13, totalPriceSek=11053.25, totalPricePln=4321.0, destination=Destination{id=23, hotellName='Copacabana Beachfront Resort', pricePerWeek=850.25, city='Rio de Janeiro', country='Brazil'}}
+2024-01-02 02:17:13.921 [http-nio-8585-exec-5] INFO  MyLogger - Destination edited 
+From: Destination{id=14, hotellName='Canal Zone Retreat', pricePerWeek=1300.5, city='Panama City', country='Panama'}
+To: Destination{id=14, hotellName='Canal Zone Retreat', pricePerWeek=1300.5, city='Panama City', country='Panama'}
+2024-01-02 02:17:13.922 [http-nio-8585-exec-5] INFO  MyLogger - Destination saved: Destination{id=14, hotellName='Canal Zone Retreat', pricePerWeek=1300.5, city='Panama City', country='Panama'}
+2024-01-02 02:17:13.948 [http-nio-8585-exec-5] INFO  MyLogger - Trip saved: Trip{tripId=14, departureDate='2023-12-30', numberOfWeeks=14, totalPriceSek=18207.0, totalPricePln=7118.0, destination=Destination{id=14, hotellName='Canal Zone Retreat', pricePerWeek=1300.5, city='Panama City', country='Panama'}}

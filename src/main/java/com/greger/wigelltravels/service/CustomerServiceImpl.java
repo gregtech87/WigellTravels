@@ -82,6 +82,8 @@ public class CustomerServiceImpl implements CustomerService{
         customerFromDb.setEmail(customer.getEmail());
         customerFromDb.setPhone(customer.getPhone());
         customerFromDb.setDateOfBirth(customer.getDateOfBirth());
+        customerFromDb.setActive(customer.getActive());
+        customerFromDb.setAuthority(customer.getAuthority());
         customer.setCustomerId(id);
         logger.info("Customer edited \nFrom: " + customer + "\nTo: " + customerFromDb);
         return saveCustomer(customerFromDb);

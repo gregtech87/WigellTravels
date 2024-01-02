@@ -1,23 +1,30 @@
 package com.greger.wigelltravels.controller;
 
+import com.greger.wigelltravels.dao.CustomerUserRecord;
+import com.greger.wigelltravels.entity.Customer;
 import com.greger.wigelltravels.entity.Destination;
 import com.greger.wigelltravels.entity.Trip;
+import com.greger.wigelltravels.service.CustomerService;
 import com.greger.wigelltravels.service.DestinationService;
 import com.greger.wigelltravels.service.TripService;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
- @RestController
+@RestController
 @RequestMapping("/api/v1")
  public class TravelControllerUser {
 
-    private TripService tripService;
-    private DestinationService destinationService;
+    private final TripService tripService;
+    private final DestinationService destinationService;
+     private final CustomerService customerService;
 
-    public TravelControllerUser(TripService tripService, DestinationService destinationService) {
+    public TravelControllerUser(TripService tripService, DestinationService destinationService, CustomerService customerService) {
         this.tripService = tripService;
         this.destinationService = destinationService;
+        this.customerService = customerService;
     }
 
     @GetMapping("/trips")

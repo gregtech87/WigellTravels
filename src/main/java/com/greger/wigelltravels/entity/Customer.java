@@ -17,6 +17,10 @@ public class Customer {
     private String userName;
     @Column(name = "password")
     private String password;
+    @Column(name = "authority")
+    private String authority;
+    @Column(name = "active")
+    private byte active;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_Name")
@@ -24,7 +28,7 @@ public class Customer {
     @Column(name = "email")
     private String email;
     @Column(name = "phone", nullable = true)
-    private Integer phone;
+    private String phone;
     @Column(name = "date_of_birth")
     private String dateOfBirth;
 
@@ -89,11 +93,11 @@ public class Customer {
         this.email = email;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -121,19 +125,37 @@ public class Customer {
         this.trips = tripList;
     }
 
+    public byte getActive() {
+        return active;
+    }
+
+    public void setActive(byte active) {
+        this.active = active;
+    }
+
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + customerId +
+                "customerId=" + customerId +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", authority='" + authority + '\'' +
+                ", active=" + active +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phone=" + phone +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", address=" + address +
-                ", tripList=" + trips +
+                ", trips=" + trips +
                 '}';
     }
 }
