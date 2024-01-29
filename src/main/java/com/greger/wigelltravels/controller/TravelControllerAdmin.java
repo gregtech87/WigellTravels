@@ -29,9 +29,10 @@ public class TravelControllerAdmin {
         this.tripService = tripService;
     }
 
-    //    @GetMapping("/username")
+//        @GetMapping("/username")
 //    public String currentUserName(Authentication authentication) {
-//        return authentication.getName();
+//            System.out.println(authentication.getAuthorities());
+//        return authentication.getAuthorities().toString();
 //    }
     @GetMapping("/customers")
     public List<Customer> findAll() {

@@ -21,6 +21,9 @@ import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.List;
 
+/*username & password
+Admin: lasse lasse
+User: tyra tyra*/
 
 @Configuration
 public class SecurityConfig {
